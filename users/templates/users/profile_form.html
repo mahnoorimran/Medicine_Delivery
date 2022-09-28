@@ -1,0 +1,40 @@
+{% extends 'custpanel.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+
+<!-- Form Add items -->
+
+    
+    <div class="container" style="background-color: white; width:80%; margin-top:2rem; margin-bottom:4rem; border-radius: 1rem; padding-top: 2rem; box-shadow: 0 1px 20px 0 rgba(237, 231, 231, 0.15);">
+      <div class="row align-items-stretch no-gutters contact-wrap justify-content-center">
+        <div class="col-md-8">
+          <div class="form h-100">
+            <form class="mb-5" action="{% url 'edit-account' %}" method="POST" enctype="multipart/form-data" name="contactForm">
+            {% csrf_token %}
+            {% for feild in form %}
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <label for="" class="col-form-label">{{feild.label}}</label><br>
+                  <h5 style="border-color:  #4308af;  ">{{feild}}</h5>
+                </div>
+              </div>
+            {% endfor %}
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <input type="submit" value="Submit" class="btn btn-primary py-2 px-4">
+                  <span class="submitting"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Form Add Items -->
+
+{% endblock %}

@@ -1,0 +1,229 @@
+{% load static %}
+
+
+<div class="header">
+
+  <div class="container">
+
+      <div class="row">
+
+          <div class="col-md-3 col-sm-4">
+
+              <div class="logo">
+
+                  <a href="index.html">
+
+                      <img src="images/logo.png" alt="Orani E-shop">
+
+                  </a>
+
+              </div>
+
+          </div>
+
+          <div class="col-md-7 col-sm-5">
+
+              <div class="search-form">
+
+                  <form class="navbar-form" role="search">
+
+                      <div class="form-group">
+
+                        <input type="text" class="form-control" placeholder="What do you need...">
+
+                      </div>
+
+                      <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+
+                  </form>
+
+              </div>
+
+          </div>
+
+          <div class="col-md-2 col-sm-3">
+
+              <div class="cart">
+
+                  <div class="cart-icon">
+
+                      <a href=""><i class="fa fa-shopping-cart"></i></a>
+
+                  </div>
+
+                  <div class="cart-text">
+
+                      SHOPPING CART
+
+                      <br>
+
+                      0 items - $0.00
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+</div>
+{% load static %}
+
+<header class="header-style-1"> 
+  
+  
+    <div class="top-bar animate-dropdown">
+      <div class="container" style="background-color: white;">
+        <div class="header-top-inner">
+          <div class="cnt-account">
+            <ul class="list-unstyled">
+            
+            
+            {% if request.user.is_authenticated %}
+            <li ><a href="{% url 'orders' %}"><span style="color: blue;">Orders</span></a></li>
+            <li class="login"  style="color: blue;"><a href="{% url 'logout' %}"><span style="color: blue;">Logout</span></a></li>
+            {% else %}
+            <li class="login"  style="color: blue;"><a href="{% url 'login' %}"><span style="color: blue;">Login</span></a></li>
+            {% endif %}
+            </ul>
+          </div>
+        
+          <div class="clearfix"></div>
+        </div>
+     
+      </div>
+     
+    </div>
+   
+  
+    <div class="main-header">
+      <div class="container" >
+        <div class="row" >
+          <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
+            
+            <div class="logo"> <a href=""> <img src="" > </a>
+             </div>
+           
+           
+          <div class="col-lg-7 col-md-6 col-sm-8 col-xs-12 top-search-holder"> 
+            
+            <div class="">
+              <form action="{% url 'search' %}" method="GET">
+                <div class="control-group">
+            
+                  <input class="search-field" placeholder="Search here...."  name="query_search" id="query_search" style="width: 54rem;  border:1px solid rgb(44, 6, 215)">
+                  <button class="btn btn-success my-2 my-sm-0" type="submit" style="padding: 1.7rem; background-color: white; color: #00569b; margin-top: -0.3rem;">Search</button>
+                 </div>
+              </form>
+            </div>
+           
+            
+           
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12  ">
+              <a href="{% url 'cart' %}"><img src="{% static 'styles/assets/images/cart.svg' %}" alt=""style=" width: 50px;
+              height: 51px; color: fff;"></a>
+              <p id="cart-total"style="color:#fff;background-color:red;
+              width:21px;height:25px;border-radius:50%;font-size:14px;margin: -5.5rem 0 0 0; text-align: center;
+              font-weight: normal;padding: 2px 0px; display: inline-block;"> {{cartItems}}
+
+              </p>
+
+              {% if request.user.is_superuser %}
+              <a href="{% url 'adminDashboard' %}" style="color: rgb(221, 51, 51); margin-left: 1rem;"><i class="fas fa-user fa-2x"></i></a>
+              {% else %}
+              <a href="{% url 'dashboard' %}" style="color: white; margin-left: 1rem;"><i class="fas fa-user fa-2x"></i></a>
+              
+              {% endif %}
+              </div> 
+            
+        </div>
+       
+     
+      
+
+      </div>
+      
+      
+    </div>
+    
+    
+     <div class="header-nav animate-dropdown"style="background-color:#00569b;">
+      <div class="container">
+        <div class="yamm navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+         <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> 
+         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar">
+         </span> <span class="icon-bar"></span> </button>
+          </div>
+          <div class="nav-bg-class" style="background-color:#00569b;">
+            <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+              <div class="nav-outer">
+                <ul class="nav navbar-nav"style="font-family:'Lato';">
+                 
+                  <li >
+                   <a href="{% url 'home' %}">Home</a>
+
+                  </li>
+                  <li class="dropdown mega-menu"> 
+                  <a href=""  data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Wellness<span class="caret"></span> </a>
+                    <ul class="dropdown-menu container">
+                      <li>
+                       
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-menu">
+                             
+                              <ul class="links">
+                                {% if categories %}
+                                    {% for menu in categories %}
+                                <li><a href="{% url 'shop'  %}">{{menu.name}}</a></li>
+                                
+                                {% endfor %}
+                                {% endif %}
+                              </ul>
+                            </div>
+                           
+                          
+                          
+<!--                          
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-menu custom-banner">
+                                 <a href="#"><img alt="" src="{% static 'styles/assets/images/Medicine.jpg' %}"></a> </div>
+                          </div>
+                            -->
+                        </div>
+                        </li>
+                    </ul>
+                  </li>
+                  <li> 
+                    <a href="{% url 'about_us' %}"  >About Us </a></li>
+
+                              
+                  
+                  <li class="dropdown hidden-sm"> <a href="{% url 'Contact' %}" >Contact Us </a> </li>
+                  
+                  
+                 
+                
+                <div class="clearfix"></div>
+              </div>
+             
+            </div>
+          
+            
+          </div>
+         
+        </div>
+       
+      </div>
+      
+      
+    </div>
+   
+    
+    
+  </header>
+  
+  
+  

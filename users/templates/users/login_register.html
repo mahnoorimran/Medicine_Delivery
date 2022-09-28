@@ -1,0 +1,115 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block content %}
+<style>
+#id_first_name,#id_email,#id_username,#id_password1,#id_password2{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+</style>
+<div class="container">
+    <div class="sign-in-page">
+        <div class="row">
+            <!-- create a new account -->
+            
+<div class="col-md-6 col-sm-6 create-new-account">
+    
+	<h4 class="checkout-subtitle">Create a new account</h4>
+	<p class="text title-tag-line">Create your new account.</p>
+	<form class="register-form outer-top-xs" action="{% url 'register' %}" method="POST" role="form">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group" >
+	    	<label class="info-title">{{field.label}} <span>*</span></label>
+	    	{{field}}
+            {% for error in field.errors %}
+            <p style="color: brown;">{{error}}</p>
+            {% endfor %}
+	  	</div>
+        {% endfor %}
+
+        
+	  	<input type="submit" value="Sign Up" class="btn-upper btn btn-primary checkout-page-button"></input>
+	</form>
+	
+	
+</div>	
+
+<!-- create a new account -->		
+<div class="col-md-6 col-sm-6 sign-in">
+	<h4 class="">Sign in</h4>
+	<p class="">Hello, Welcome to your account.</p>
+
+	<form class="register-form outer-top-xs" action="{% url 'login' %} " method="post">
+        {% csrf_token %}
+        
+		<div class="form-group">
+		    
+		     <label class="info-title" >Username</label> 
+             <input type="text"class="form-control" name="username"  >
+		</div>
+        <div class="form-group">
+		    <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
+		    <input type="password" class="form-control" name="password"placeholder="password"/>
+		</div>
+
+	  	
+		<div class="radio outer-xs">
+		  	<label>
+		    	<p>You don't have account <a href="{% url 'register' %}"> Sign-Up</a></p>
+		  	</label>
+		  	<a href="{% url 'reset_password' %}" class="forgot-password pull-right">Forget Password?</a>
+		</div>
+	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+	</form>					
+</div>
+
+
+</div>
+</div>
+</div>
+<!-- Sign-in -->
+
+
+<!-- {% if page == 'register' %}
+<h1>Register Here</h1>
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        <label for="inputform">{{field.label}}</label>
+        {{field}}
+
+        {% for error in field.errors %}
+        <p style="color: brown;">{{error}}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+  <input type="submit"value="Register">
+</form>
+<p>Already have account <a href="{% url 'login' %}"> Login </a></p>
+{% else %} -->
+
+<!-- <form action="{% url 'login' %} " method="post" style="margin-top: 2rem; margin-bottom: 2rem;">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username"/>
+    <input type="password" name="password" placeholder="Enter password"/>
+    <input type="submit" value="login">
+    <p>You don't have account <a href="{% url 'register' %}"> Sign-Up</a></p>
+</form> -->
+{% endif %}
+{% endblock %}
